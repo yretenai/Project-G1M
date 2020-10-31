@@ -1,19 +1,4 @@
-#include "../Public/stdafx.h"
-
-#include <string>
-#include <fstream>
-#include <filesystem>
-#include <vector>
-#include <map>
-#include <set>
-#include <array>
-
-#include "../Public/G1M.h"
-#include "../Public/G1T.h"
-#include "../Public/Utils.h"
-#include "../Public/Oid.h"
-#include "../Public/G2A.h"
-#include "../Public/G1A.h"
+#include "../Public/Source.h"
 
 const char* g_pPluginName = "ProjectG1M";
 const char* g_pPluginDesc = "G1M Noesis plugin";
@@ -26,8 +11,6 @@ bool bAdditive = false;
 bool bColor = false;
 bool bDisplayDriver = false;
 bool bDisableNUNNodes = false;
-
-#include "../Public/Options.h"
 
 template<bool bBigEndian>
 bool CheckModel(BYTE* fileBuffer, int bufferLen, noeRAPI_t* rapi)

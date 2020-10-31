@@ -602,5 +602,39 @@ void createDriverIndexBuffers(mesh_t& dMesh, std::vector<RichVec3> polys, std::v
 	}
 }
 
+typedef uint32_t KTID_t;
+
+#define KTIDHASH_32(t, v, s) { \
+	int32_t i = 0; \
+	KTID_t t; \
+	while(t[i] != 0) { \
+		t = s; \
+		s *= 0x1F; \
+		v += 0x1F * s * (int8_t) t[i++]; \
+	} \
+}
+
+KTID_t ktidhash32(char* text, KTID_t iv, uint8_t seed) {
+	KTIDHASH_32(text, iv, seed);
+	return (KTID_t) iv;
+}
+
+const KTID_t constexpr cktidhash32(const char* text, KTID_t iv, KTID_t seed) {
+	KTIDHASH_32(text, iv, seed);
+	return (KTID_t) iv;
+}
+
+KTID_t ktidhash32(char* text) {
+	if(text == nullptr) return 0;
+	return ktidhash32(text, (KTID_t)text[0] * 0x1F, 0x1F);
+}
+
+const KTID_t constexpr cktidhash32(const char* text) {
+	if(text == nullptr) return 0;
+	return cktidhash32(text, (KTID_t)text[0] * 0x1F, 0x1F);
+}
+
+#define KTID(c) cktidhash32(c)
+
 #endif // !UTILS_H
 
