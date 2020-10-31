@@ -606,11 +606,11 @@ typedef uint32_t KTID_t;
 
 #define KTIDHASH_32(t, v, s) { \
 	int32_t i = 0; \
-	KTID_t t; \
+	KTID_t a; \
 	while(t[i] != 0) { \
-		t = s; \
+		a = s; \
 		s *= 0x1F; \
-		v += 0x1F * s * (int8_t) t[i++]; \
+		v += 0x1F * a * (int8_t) t[i++]; \
 	} \
 }
 
