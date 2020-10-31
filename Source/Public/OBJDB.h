@@ -12,11 +12,13 @@ typedef std::pair<OBJDBTypeId_t, uintptr_t> OBJDBTypeHint_t;
 template<bool bBigEndian>
 class OBJDB {
     std::map<KTID_t, std::map<KTID_t, OBJDBTypeHint_t>> objects;
-    std::unique_ptr<uint8_t*> buffer;
+    std::unique_ptr<uint8_t[]> buffer;
+    size_t bufferLength;
 
 public:
-	OBJDB(BYTE* buffer, int bufferLen) {
-
+    OBJDB(uint8_t* buffer, size_t bufferLen) : buffer(new uint8_t[bufferLen]) {
+        std::copy(buffer.get(), buffer.get() + bufferLength, buffer);
+        bufferLength = bufferLen;
     }
 
     bool hasObject(KTID_t id) {

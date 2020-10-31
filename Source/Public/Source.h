@@ -11,6 +11,7 @@
 #include <array>
 #include <utility>
 #include <memory>
+#include <algorithm>
 
 #include <cstdbool>
 #include <cstdint>
